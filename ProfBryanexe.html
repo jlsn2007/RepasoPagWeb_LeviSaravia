@@ -24,6 +24,17 @@
             padding: 10px;
             font-size: 18px;
         }
+        
+        /* Quitar flechas de los inputs de tipo number */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
     </style>
 </head>
 <body>
@@ -45,10 +56,10 @@
     </nav>
 
     <div class="container">
-        <h1>Calculadora de Descuentos</h1>
-        <label for="monto">Ingrese el monto de la compra ($):</label>
+        <h1>¡Rápido Profe Bryan.exe haga sus Descuentos! 😱👍</h1>
+        <label for="monto">Ingrese el monto de la compra ¡YA!:</label>
         <input type="number" id="monto" min="0" step="0.01">
-        <button onclick="calcularDescuento()" class="btn btn-primary">Calcular Descuento</button>
+        <button onclick="calcularDescuento()" class="btn btn-primary">Calcular</button>
         <h3 id="resultado"></h3>
     </div>
 
@@ -66,7 +77,7 @@
             }
             
             let montoFinal = monto - (monto * descuento);
-            document.getElementById("resultado").innerText = `Descuento aplicado: ${descuento * 100}% \nTotal a pagar: $${montoFinal.toFixed(2)}`;
+            document.getElementById("resultado").innerText = `Descuento: ${descuento * 100}% \n Total a pagar: $${montoFinal.toFixed(2)}`;
         }
     </script>
 

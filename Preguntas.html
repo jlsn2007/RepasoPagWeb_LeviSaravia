@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📑Guía HTML, CSS y JS📔</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: black;
+            color: white;
+            background-image: url('https://i.pinimg.com/736x/82/cd/7e/82cd7e61e37432dc3aa96ba825264305.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .navbar {
+            background-color: #222;
+        }
+        .card {
+            background-color: #333;
+            color: white;
+            border: none;
+            margin: 10px;
+            width: 300px;
+        }
+        .card-header {
+            cursor: pointer;
+            text-align: center;
+        }
+        .card img {
+            max-height: 150px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .faq-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="Preguntas.html">Repaso Págs Web 🧠💻</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="Preguntas.html">Cuestionario de conocimientos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ProfBryanexe.html">Ayudandole al Profe Bryan.exe</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <center><h1>Cuestionario</h1><p>(Toque cada pregunta para desplegar la respuesta)</p></center>
+        <div id="faq" class="faq-container"></div>
+    </div>
+    <p></p>
+    <p></p>
+    <script>
+        const preguntasRespuestas = [
+            { pregunta: "1- ¿Qué es HTML y cuál es su función principal en el desarrollo web?", respuesta: "Pues recuerdo que al principio pensaba que era un lenguaje de programación pero en realidad no es así por lo que entendí, pero sé que se utiliza como el lenguaje base que estructura una página web con su información." },
+            { pregunta: "2- ¿Qué son las etiquetas HTML y cómo se utilizan?", respuesta: "Las etiquetas HTML son elementos que se utilizan para definir la estructura del contenido de la página web." },
+            { pregunta: "3- Proporciona ejemplos de algunas de las etiquetas HTML más comunes.", respuesta: "Las que más rescuerdo son: p, para escribir párrafos, ul y li para hacer listado de parrajos, img para colocar imagenes, las h1,h2,h3 etc para poner diferentes tipos de encabezado, center para centrar, div específicamente para secciones o bloques de texto y poder configurar dicha sección." },
+            { pregunta: "4- ¿Qué es CSS y cómo se utiliza para dar estilo a una página web?", respuesta: "CSS es el complemento del HTML, ya que es la que le dá el buen diseño visual y hace que la página web sea muy atractivo a la vista, HTML es solamente el machon y CSS es la pintura." },
+            { pregunta: "5- ¿Cuáles son las propiedades más importantes de CSS?", respuesta: "Las más importantes son: color, font-size, margin, padding, display y position. Estas sirven para que se cumpla el verdadero objetivo del CSS en la página." },
+            { pregunta: "6- Explica el modelo de caja (box model) en CSS.", respuesta: "El modelo de caja define cómo se organizan los elementos en CSS, considerando el contenido que son el padding, border y margin." },
+            { pregunta: "7- ¿Qué es el diseño responsivo y cómo se logra con CSS?", respuesta: "El diseño responsivo permite que un sitio web se adapte a diferentes tamaños de pantalla para que a la hora de verlo en diferentes dispositivos no salga desordenado en un lado o muy pequeño en otro." },
+            { pregunta: "8- ¿Qué es JavaScript y cómo se integra en el desarrollo web?", respuesta: "Este si es un lenguaje de programación, permite agregar interactividad a los sitios web para que ejecuten funciones que requieren de realizar acciones como sumar o restar hasta otras funcionalidades más complejas" },
+            { pregunta: "9- Explica cómo JavaScript interactúa con el HTML y CSS a través del DOM (Document Object Model).", respuesta: "Js utiliza el DOM para manipular los elementos del HTML y modificar estilos de forma dinámica." },
+            { pregunta: "10- Proporciona ejemplos de cómo JavaScript puede hacer que una página web sea interactiva.", respuesta: "Bueno puede ser interacciones básicas como la validación de datos de un login, botones dinámicos y alertas dentro de la misma pantalla o realizar sumas, restas, divisiones, multiplicaciones etc etc." },
+            { pregunta: "11- ¿Qué es Git y por qué es importante para el desarrollo web?", respuesta: "Git es un sistema de control de versiones que permite rastrear cambios en el código y colaborar con otros desarrolladores (lo busqué en chatGPT pq no sabia xD)." },
+            { pregunta: "12- Explica cómo Git se usa para el control de versiones en proyectos de desarrollo web.", respuesta: "Git permite crear repos, hacer commits, crear ramas y fusionar los cambios en proyectos y pushearlos a la rama master para tener el trabajo unido de cada desarrollador en la rama principal." },
+            { pregunta: "13- ¿Qué es GitHub y cómo facilita la colaboración en proyectos web?", respuesta: "GitHub está relacionado con Git y es una plataforma que facilita la colaboración mediante repositorios que son en donde están guardados los proyectos que han sido subidos." }
+        ];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let faqContainer = document.getElementById("faq");
+            preguntasRespuestas.forEach((item, index) => {
+                let card = document.createElement("div");
+                card.classList.add("card");
+                card.innerHTML = `
+                    <div class="card-header" onclick="toggleAnswer(${index})">
+                        <h5>${item.pregunta} <i class="fas fa-chevron-down"></i></h5>
+                    </div>
+                    <div class="card-body" id="answer-${index}" style="display: none;">
+                        <p>${item.respuesta}</p>
+                    </div>
+                `;
+                faqContainer.appendChild(card);
+            });
+        });
+
+        let openAnswer = null;
+        function toggleAnswer(index) {
+            if (openAnswer !== null && openAnswer !== index) {
+                document.getElementById(`answer-${openAnswer}`).style.display = 'none';
+            }
+            let answer = document.getElementById(`answer-${index}`);
+            answer.style.display = (answer.style.display === 'none') ? 'block' : 'none';
+            openAnswer = (answer.style.display === 'block') ? index : null;
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
